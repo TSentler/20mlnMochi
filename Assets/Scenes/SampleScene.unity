@@ -651,6 +651,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+<<<<<<< HEAD
 --- !u!1001 &4668284676143547650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -728,3 +729,5 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39f080070b9cf1ae595261722f8eae73, type: 3}
+=======
+>>>>>>> 4ad10cbb090deae4cf82641b52d249a7f83efab8
