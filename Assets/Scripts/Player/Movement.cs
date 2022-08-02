@@ -11,12 +11,6 @@ public class Movement : MonoBehaviour
     private Rigidbody2D _rb;
     [SerializeField] private float _runSpeed = 10.0f;
     
-    public float RunSpeed
-    {
-        get => _runSpeed;
-        set => _runSpeed = value;
-    }
-
     private void Awake()
     {
         _rb = gameObject.GetComponent<Rigidbody2D>();
