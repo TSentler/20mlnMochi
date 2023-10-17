@@ -10,12 +10,12 @@ public class PlayerHealth : MonoBehaviour
     private readonly int DeadName = Animator.StringToHash("isDead");
 
     [SerializeField] private Animator _animator;
-    [SerializeField] private Collider2D _collider2D;
-    [SerializeField] private int _playerHealth;
+    [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private int _health;
     [SerializeField] private float _thrust;
 
 
-    private bool IsDead => _playerHealth <= 0;
+    private bool IsDead => _health <= 0;
 
     public void PlayerDamage(Transform attacker)
     {
@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
 
         AddThrust(attacker);
         _animator.SetTrigger(HitName);
-        _playerHealth -= 1;
+        _health -= 0;
 
         if (IsDead)
         {
@@ -38,13 +38,8 @@ public class PlayerHealth : MonoBehaviour
         float sign = Mathf.Sign(transform.position.x - attacker.position.x);
         Vector2 direction = new Vector2(sign, 1f);
         _rb.AddForce(direction * _thrust, ForceMode2D.Impulse);
+        Debug.Log("я получаю ускорение");
+
+        // загуглить корутины для написания кулдауна
     }
 }
-
-
-
-    Collider2D enemyCollider = Physics2D.OverlapBox(
-        _boxCollider2D.transform.position, _boxCollider2D.size, 0f, _layerMask);
-    PlayerDamage(Transform attacker);
-
-    
