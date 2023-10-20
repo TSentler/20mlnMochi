@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -8,9 +9,9 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class Movement : MonoBehaviour
 {
     private float _horizontal;
+    private const float DestroyDelay = 1f;
 
-    private Vector3 worldCenter;
-    private Vector3 worldHalfExtents;
+    private bool canThrust = true;
 
     private Rigidbody2D _rb;
     [SerializeField] private float _runSpeed = 10.0f;
@@ -26,7 +27,9 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.velocity = new Vector2(_horizontal * _runSpeed * Time.deltaTime, _rb.velocity.y );   
+        if ((canThrust) && !(_playerHealth.IsDead))
+            _rb.velocity = new Vector2(_horizontal * _runSpeed * Time.deltaTime, _rb.velocity.y);   
+
     }
 
     public void Move(Vector2 direction)
@@ -41,9 +44,22 @@ public class Movement : MonoBehaviour
     {
         if (targetCollider == null)
             return;
+        if (!canThrust)
+            return;
 
+        canThrust = false;
         _playerHealth.PlayerDamage(targetCollider.transform);
+        StartCoroutine(DamageCooldown());
     }
+
+    IEnumerator DamageCooldown()
+    {
+        yield return new WaitForSecondsRealtime(DestroyDelay);
+        canThrust = true;
+    }
+
+
+
 
     void OnDrawGizmos()
     {

@@ -515,51 +515,6 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 2463829072585472598, guid: c81f786cf7cab4398855250286a84c1f, type: 3}
   m_PrefabInstance: {fileID: 1117655531}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &220600826
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220600816}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.16}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.72, y: 0.32}
-    newSize: {x: 0.72, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.72, y: 0.32}
-  m_EdgeRadius: 0
 --- !u!1 &224504355
 GameObject:
   m_ObjectHideFlags: 0
@@ -2390,9 +2345,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3510317788806399461, guid: c81f786cf7cab4398855250286a84c1f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 220600822}
-    - targetCorrespondingSourceObject: {fileID: 3510317788806399461, guid: c81f786cf7cab4398855250286a84c1f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 220600826}
   m_SourcePrefab: {fileID: 100100000, guid: c81f786cf7cab4398855250286a84c1f, type: 3}
 --- !u!1 &1148376924
 GameObject:
@@ -7654,7 +7606,7 @@ MonoBehaviour:
   _animator: {fileID: 2157755287337475601}
   _rb: {fileID: 848733601}
   _health: 3
-  _thrust: 0.1
+  _thrust: 3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
