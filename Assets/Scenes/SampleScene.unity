@@ -510,6 +510,7 @@ MonoBehaviour:
   _rb: {fileID: 220600817}
   _enemyHealth: 2
   _thrust: 30
+  _boxCollider2D: {fileID: 220600818}
 --- !u!95 &220600823 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2463829072585472598, guid: c81f786cf7cab4398855250286a84c1f, type: 3}
@@ -1237,6 +1238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 2157755287337475601}
+  _playerHealth: {fileID: 8177025877123728363}
 --- !u!114 &590646669
 MonoBehaviour:
   m_ObjectHideFlags: 0

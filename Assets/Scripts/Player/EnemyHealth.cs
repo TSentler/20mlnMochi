@@ -13,6 +13,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private int _enemyHealth;
     [SerializeField] private float _thrust;
+    //[SerializeField] private BoxCollider2D _boxCollider2D;
 
 
     private bool IsDead => _enemyHealth <= 0;
@@ -30,6 +31,8 @@ public class EnemyHealth : MonoBehaviour
         {
             _animator.SetTrigger(DeadName);
             Destroy(_rb, DestroyDelay);
+            //_boxCollider2D.enabled = false;
+            //gameObject.layer = 6;
         }
     }
 

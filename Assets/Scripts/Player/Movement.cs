@@ -9,7 +9,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 public class Movement : MonoBehaviour
 {
     private float _horizontal;
-    private const float DestroyDelay = 1f;
+    private const float PlayerDamageDelay = 1f;
 
     private bool canThrust = true;
 
@@ -54,7 +54,7 @@ public class Movement : MonoBehaviour
 
     IEnumerator DamageCooldown()
     {
-        yield return new WaitForSecondsRealtime(DestroyDelay);
+        yield return new WaitForSecondsRealtime(PlayerDamageDelay);
         canThrust = true;
     }
 

@@ -8,8 +8,10 @@ public class MoveAnimation : MonoBehaviour
 {
     private readonly int _isRun = Animator.StringToHash("isRun");
     private float _horizontal;
+
     [SerializeField] private Animator _animator;
-    
+    [SerializeField] private PlayerHealth _playerHealth;
+
     private bool IsRun => _horizontal < -0.01f || _horizontal > 0.01f;
 
     private void OnValidate()
@@ -20,7 +22,7 @@ public class MoveAnimation : MonoBehaviour
     
     private void MirrorSprite()
     {
-        if (!IsRun)
+        if (!IsRun || _playerHealth.IsDead) 
             return;
         
         Vector3 scale = transform.localScale;
