@@ -13,15 +13,22 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody2D _rb;
-    [SerializeField] private int _health;
+    [SerializeField] public int _health;
     [SerializeField] private float _thrust;
-
+    private LifeBar _lifeBar;
 
     public bool IsDead => _health <= 0;
+
+    private void Awake()
+    {
+        _lifeBar = FindObjectOfType<LifeBar>();
+    }
+
 
     public void PlayerDamage(Transform attacker)
     {
         _health -= 1;
+        _lifeBar.Damage();
         AddThrust(attacker);
         if (IsDead)
         {
