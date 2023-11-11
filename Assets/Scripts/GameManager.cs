@@ -5,6 +5,7 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    
     private Player _player;
     
 
@@ -22,4 +23,5 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Объект зашёл");
     }
+    
 }

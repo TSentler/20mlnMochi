@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    private const float EnemyDamageDelay = 0.5f;
+
     private readonly int AttackName = Animator.StringToHash("IsAttack");
     
     public KeyCode Key;
@@ -13,6 +15,7 @@ public class Attack : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private BoxCollider2D _boxCollider2D;
     [SerializeField] private LayerMask _layerMask;
+    private bool _canBeDamaged = true;
 
     private void OnValidate()
     {
@@ -25,15 +28,22 @@ public class Attack : MonoBehaviour
         if (Input.GetKeyDown(Key))
         {
             _animator.SetTrigger(AttackName);
-            Collider2D enemyCollider = Physics2D.OverlapBox(
-                _boxCollider2D.transform.position, _boxCollider2D.size, 0f, _layerMask);
-            AttackEnemy(enemyCollider);
         }
+    }
+
+    private void AttackEnemy()
+    {
+        Collider2D enemyCollider = Physics2D.OverlapBox(
+                        _boxCollider2D.transform.position, _boxCollider2D.size, 0f, _layerMask);
+        AttackEnemy(enemyCollider);
     }
 
     private void AttackEnemy(Collider2D enemyCollider)
     {
-        if (enemyCollider == null)
+        if (_canBeDamaged == false)
+            return;
+
+        if (enemyCollider == null) 
             return;
 
         EnemyHealth enemy = enemyCollider.GetComponent<EnemyHealth>();
@@ -42,5 +52,13 @@ public class Attack : MonoBehaviour
 
         enemy.Damage(transform);
 
-    } 
+        _canBeDamaged = false;
+        StartCoroutine(DamageCooldown());
+    }
+
+    IEnumerator DamageCooldown()
+    {
+        yield return new WaitForSecondsRealtime(EnemyDamageDelay);
+        _canBeDamaged = true;
+    }
 }

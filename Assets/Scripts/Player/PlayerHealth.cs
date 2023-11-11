@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class PlayerHealth : MonoBehaviour
+
+public class PlayerHealth : CharacterHealth
 {
-
-    
+    private const float PlayerDamageDelay = 1f;
 
     private readonly int HitName = Animator.StringToHash("isHit");
     private readonly int DeadName = Animator.StringToHash("isDead");
@@ -14,9 +15,10 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] public int _health;
-    [SerializeField] private float _thrust;
+    
     private LifeBar _lifeBar;
-
+    private bool _canBeDamaged = true;
+    public bool CanBeDamaged => _canBeDamaged;
     public bool IsDead => _health <= 0;
 
     private void Awake()
@@ -24,12 +26,12 @@ public class PlayerHealth : MonoBehaviour
         _lifeBar = FindObjectOfType<LifeBar>();
     }
 
-
     public void PlayerDamage(Transform attacker)
     {
         _health -= 1;
         _lifeBar.Damage();
-        AddThrust(attacker);
+        OnDamaged.Invoke(attacker);
+
         if (IsDead)
         {
             _animator.SetTrigger(DeadName);
@@ -37,18 +39,13 @@ public class PlayerHealth : MonoBehaviour
         {
             _animator.SetTrigger(HitName);
         }
+        
+        _canBeDamaged = false;
+        StartCoroutine(DamageCooldown());
     }
-
-
-    private void AddThrust(Transform attacker)
+    IEnumerator DamageCooldown()
     {
-            float sign = Mathf.Sign(transform.position.x - attacker.position.x);
-            Vector2 direction = new Vector2(sign, 1f);
-            _rb.velocity = Vector2.zero;
-            _rb.AddForce(direction * _thrust, ForceMode2D.Impulse);
-            
-            Debug.Log("я получаю ускорение");
+        yield return new WaitForSecondsRealtime(PlayerDamageDelay);
+        _canBeDamaged = true;
     }
-
-
 }
