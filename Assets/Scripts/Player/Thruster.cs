@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(CharacterHealth))]
+[RequireComponent(typeof(Rigidbody2D), typeof(CharacterHealth), typeof(Movement))]
 public class Thruster : MonoBehaviour
 {
     [SerializeField] private float _thrust;
+    [SerializeField] private Movement _movement;
     private CharacterHealth _characterHealth;
     private Rigidbody2D _rb;
 
