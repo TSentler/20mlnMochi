@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class MoveAnimation : MonoBehaviour
 {
-    private readonly int _isRun = Animator.StringToHash("isRun");
+    private readonly int _isRun = Animator.StringToHash("IsRun");
     private float _horizontal;
 
     [SerializeField] private Animator _animator;
-    [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private CharacterHealth _characterHealth;
 
     private bool IsRun => _horizontal < -0.01f || _horizontal > 0.01f;
 
@@ -20,9 +20,9 @@ public class MoveAnimation : MonoBehaviour
             Debug.LogWarning("Animator not found", this);
     }
     
-    private void MirrorSprite()
+    public void MirrorSprite()
     {
-        if (!IsRun || _playerHealth.IsDead) 
+        if (!IsRun || _characterHealth.IsDead) 
             return;
         
         Vector3 scale = transform.localScale;

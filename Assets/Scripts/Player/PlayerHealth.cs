@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
-using UnityEngine.Events;
-
 
 public class PlayerHealth : CharacterHealth
 {
@@ -13,13 +9,11 @@ public class PlayerHealth : CharacterHealth
     private readonly int DeadName = Animator.StringToHash("isDead");
 
     [SerializeField] private Animator _animator;
-    [SerializeField] private Rigidbody2D _rb;
-    [SerializeField] public int _health;
     
     private LifeBar _lifeBar;
     private bool _canBeDamaged = true;
     public bool CanBeDamaged => _canBeDamaged;
-    public bool IsDead => _health <= 0;
+    public override bool IsDead => _health <= 0;
 
     private void Awake()
     {
@@ -40,11 +34,12 @@ public class PlayerHealth : CharacterHealth
             _animator.SetTrigger(HitName);
         }
         
-        _canBeDamaged = false;
         StartCoroutine(DamageCooldown());
     }
+
     IEnumerator DamageCooldown()
     {
+        _canBeDamaged = false;
         yield return new WaitForSecondsRealtime(PlayerDamageDelay);
         _canBeDamaged = true;
     }

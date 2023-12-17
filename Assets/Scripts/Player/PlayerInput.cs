@@ -28,9 +28,11 @@ public class PlayerInput : MonoBehaviour
         {
             _movement.Pause();
         }
-            _movement.Move(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
-            _moveAnimation.Move(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+        _movement.Move(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+        _moveAnimation.Move(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+        _moveAnimation.MirrorSprite();
     }
+
     private bool CanMove()
     {
         return (_playerHealth.CanBeDamaged) && !(_playerHealth.IsDead);
